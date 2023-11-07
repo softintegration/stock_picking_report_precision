@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_report_precision
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-07 15:05+0000\n"
+"PO-Revision-Date: 2023-11-07 15:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_report_precision
+#: model:ir.model.fields,field_description:stock_picking_report_precision.field_stock_picking_type__digits
+msgid "Digits"
+msgstr "Précision à afficher sur l'imprimé"
+
+
+#. module: stock_picking_report_precision
+#: model:ir.model,name:stock_picking_report_precision.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Type de préparation"
+
+
+#. module: stock_picking_report_precision
+#: model:ir.model.fields,help:stock_picking_report_precision.field_stock_picking_type__digits
+msgid ""
+"This is the number of digits for all the float fields in delivery of this "
+"operation type,-1 mean that we ignore this setting"
+msgstr ""
+"C'est le nombre de chiffres après la virgule à afficher dans ce "
+"type d'opération, -1 signifie que nous ignorons ce paramètre"
