@@ -29,20 +29,24 @@ class IrQWeb(models.AbstractModel, QWeb):
         field_options['translate'] = translate
 
         # field converter
-        if values['xmlid'] not in CUSTOM_PRECISION_REPORTS:
+        # in the case when this method is called within the report generating
+        try:
+            if values['xmlid'] not in CUSTOM_PRECISION_REPORTS:
+                model = 'ir.qweb.field.' + field_options['type']
+            elif record._name not in CUSTOM_PRECISION_MODELS:
+                model = 'ir.qweb.field.' + field_options['type']
+            elif field_options['type'] != 'float':
+                model = 'ir.qweb.field.' + field_options['type']
+            # FIXME:This elif case must be changed when we extend the scop of the module
+            elif record.picking_type_id.digits < 0:
+                model = 'ir.qweb.field.' + field_options['type']
+            elif record.picking_type_id.digits > 0:
+                field_options.update({'precision':record.picking_type_id.digits})
+                model = 'ir.qweb.field.' + field_options['type']
+            else:
+                model = 'ir.qweb.field.integer'
+        except KeyError:
             model = 'ir.qweb.field.' + field_options['type']
-        elif record._name not in CUSTOM_PRECISION_MODELS:
-            model = 'ir.qweb.field.' + field_options['type']
-        elif field_options['type'] != 'float':
-            model = 'ir.qweb.field.' + field_options['type']
-        # FIXME:This elif case must be changed when we extend the scop of the module
-        elif record.picking_type_id.digits < 0:
-            model = 'ir.qweb.field.' + field_options['type']
-        elif record.picking_type_id.digits > 0:
-            field_options.update({'precision':record.picking_type_id.digits})
-            model = 'ir.qweb.field.' + field_options['type']
-        else:
-            model = 'ir.qweb.field.integer'
         converter = self.env[model] if model in self.env else self.env['ir.qweb.field']
 
         # get content (the return values from fields are considered to be markup safe)
